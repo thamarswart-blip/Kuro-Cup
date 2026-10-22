@@ -1,0 +1,61 @@
+/* Printdocumenten — A4, leesbaar in zwart-wit. */
+.print-doc { display: flex; flex-direction: column; gap: 24px; }
+.pd-page { background: #fff; padding: 28px 32px; color: #000; font-size: 13px; line-height: 1.4; }
+.pd-head { display: flex; align-items: center; gap: 14px; border-bottom: 2px solid #000; padding-bottom: 10px; margin-bottom: 14px; }
+.pd-head img { width: 46px; height: 46px; border-radius: 50%; }
+.pd-title { font-size: 22px; font-weight: 700; letter-spacing: -.01em; }
+.pd-sub { font-size: 13px; }
+.pd-sec h2 { font-size: 18px; margin: 14px 0 8px; border-bottom: 1px solid #000; padding-bottom: 4px; }
+.pd-sec h3, .pd-page h3 { font-size: 15px; margin: 12px 0 6px; }
+.pd-meta { margin: 0 0 10px; }
+.pd-small { font-size: 11.5px; }
+.pd-t { width: 100%; border-collapse: collapse; margin: 4px 0 10px; }
+.pd-t th, .pd-t td { border: 1px solid #000; padding: 4px 6px; text-align: left; vertical-align: top; }
+.pd-t th { background: #eee; font-weight: 700; font-size: 12px; }
+.pd-t.kv th { width: 22%; }
+.pd-t .box { width: 64px; min-width: 64px; height: 26px; text-align: center; }
+.pd-score td { height: 30px; vertical-align: middle; }
+.pd-block td { background: #f2f2f2; font-style: italic; }
+.pd-sign { margin-top: 18px; font-size: 12px; }
+.pd-keep { break-inside: avoid; }
+.print-doc ol, .print-doc ul { margin: 4px 0 8px 18px; padding: 0; }
+.print-doc li { margin: 3px 0; }
+
+@page { size: A4; margin: 12mm; }
+@media print {
+  html, body { background: #fff !important; }
+  .app-header, .drawer, .scrim, .no-print, .toast, .note { display: none !important; }
+  main.page { padding: 0 !important; max-width: none !important; gap: 0 !important; }
+  .print-doc { gap: 0; }
+  .pd-page { padding: 0; break-after: page; }
+  .pd-page:last-child { break-after: auto; }
+  .pd-t th { background: #e6e6e6 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  a { color: #000; }
+}
+
+/* Zaalopzet */
+.pd-zaal { width: 100%; height: auto; display: block; border: 1px solid #000; }
+.pd-matpool { padding: 6px 0 8px; border-bottom: 1px solid #999; }
+.pd-names { font-size: 12.5px; margin-top: 3px; }
+
+/* Certificaat van deelname — volgens het aangeleverde ontwerp (A4 staand).
+   Alle maten schalen mee met de breedte van het certificaat (cqw), op scherm én op papier. */
+.cert { padding: 0; }
+.cert-frame { container-type: inline-size; border: 1.5px solid #121212; padding: 7px; aspect-ratio: 210 / 297; max-width: 760px; margin: 0 auto; background: #FDFCF9; }
+.cert-inner { border: 1.5px solid #121212; height: 100%; display: flex; flex-direction: column; align-items: center; text-align: center; padding: 26cqw 7cqw 5cqw; color: #121212; font-family: 'Libre Caslon Text', Georgia, serif; }
+.cert-kanji { font-family: 'Noto Serif JP', 'Hiragino Mincho ProN', 'Yu Mincho', serif; font-weight: 700; font-size: 11cqw; line-height: 1; letter-spacing: .35em; margin-right: -.35em; white-space: nowrap; }
+.cert-rule { width: 88%; height: 1px; background: #B9B9B9; margin: 4cqw 0 5.5cqw; }
+.cert-event { font-size: 1.85cqw; letter-spacing: .45em; margin-right: -.45em; text-transform: uppercase; }
+.cert-title { font-weight: 700; font-size: 6.4cqw; line-height: 1.12; margin-top: 2.6cqw; }
+.cert-accent { width: 11.5cqw; height: .45cqw; background: #0166FF; margin: 3.3cqw 0 7.8cqw; }
+.cert-intro { font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic; font-weight: 500; font-size: 2.45cqw; }
+.cert-name { font-family: 'Great Vibes', 'Snell Roundhand', cursive; color: #0166FF; font-size: 10.6cqw; line-height: 1.15; margin-top: 2cqw; white-space: nowrap; max-width: 100%; }
+.cert-name.long { font-size: 8.4cqw; }
+.cert-line { width: 92%; height: 1px; background: #121212; margin: .8cqw 0 3.2cqw; }
+.cert-text { font-size: 2.15cqw; line-height: 1.75; }
+.cert-seal { margin-top: auto; font-family: 'Noto Serif JP', 'Hiragino Mincho ProN', serif; font-weight: 700; color: #C8102E; font-size: 5.4cqw; line-height: 1; width: 9cqw; height: 9cqw; display: flex; align-items: center; justify-content: center; border: .38cqw solid #C8102E; border-radius: .4cqw; }
+@media print {
+  .cert { break-after: page; }
+  .cert-frame { max-width: none; width: 100%; height: 266mm; aspect-ratio: auto; background: transparent; }
+  .cert-name, .cert-accent, .cert-seal { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}

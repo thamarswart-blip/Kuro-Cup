@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Kuro Cup Planner</title>
+  <meta name="description" content="Toernooiplanner van Dojo Kuro: deelnemers, poules, planning, vrijwilligers, tafelinterface en documenten. Werkt offline.">
+  <meta name="theme-color" content="#FFFFFF">
+  <meta name="color-scheme" content="light">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Kuro Cup">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="assets/logo-white-bg.png">
+  <link rel="apple-touch-icon" href="assets/icon-192.png">
+  <link rel="preload" href="assets/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/app.css">
+  <link rel="stylesheet" href="css/cert-fonts.css">
+  <link rel="stylesheet" href="css/print.css">
+</head>
+<body>
+  <div id="app"><main class="page"><p class="big muted">Kuro Cup Planner wordt geladen…</p></main></div>
+  <noscript><p style="padding:24px;font-size:18px">Zet JavaScript aan om de Kuro Cup Planner te gebruiken.</p></noscript>
+  <script>
+    // Als bestand geopend (file://) laden browsers geen modules: leg uit hoe het wel moet.
+    if (location.protocol === 'file:') {
+      document.getElementById('app').innerHTML = '<main class="page"><div class="card" style="max-width:760px"><h2>Start de planner via de lokale server</h2>' +
+        '<p class="big">Je hebt index.html direct als bestand geopend. Browsers staan de app dan niet toe (geen offline-opslag en geen modules).</p>' +
+        '<ol class="big" style="line-height:1.7;padding-left:22px;margin:0"><li>Ga in de Finder naar de map <strong>Kuro Cup app</strong>.</li><li>Dubbelklik op <strong>start.command</strong> (de eerste keer: rechtsklik → Open).</li><li>De planner opent vanzelf op <strong>http://localhost:8123</strong>. Laat het Terminal-venster open zolang je test.</li></ol>' +
+        '<p class="muted">Op tablets open je het webadres waar de app online staat; zie README.md.</p></div></main>';
+    }
+  </script>
+  <script>
+    // Te oude iPad/browser? Dan laadt de app niet: toon een duidelijke uitleg in plaats van een leeg scherm.
+    (function () {
+      var ok = 'noModule' in document.createElement('script') && 'indexedDB' in window;
+      try { new Function('var a = {}; return a?.b ?? 1'); } catch (e) { ok = false; }
+      if (ok || location.protocol === 'file:') return;
+      var m = navigator.userAgent.match(/OS (\d+)_(\d+)/);
+      var v = m ? (m[1] + '.' + m[2]) : 'onbekend';
+      document.getElementById('app').innerHTML = '<main class="page"><div class="card" style="max-width:760px"><h2>Deze iPad is te oud voor de planner</h2>' +
+        '<p class="big">Gevonden iOS-versie: <strong>' + v + '</strong>. De Kuro Cup Planner heeft minimaal iPadOS 13.4 nodig (aanbevolen: 14.5 of nieuwer).</p>' +
+        '<p class="big">Kijk bij Instellingen → Algemeen → Software-update of er een update is. Lukt dat niet, gebruik dan een andere iPad of het papieren pouleformulier.</p></div></main>';
+      window.__kcpTooOld = true;
+    })();
+  </script>
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
